@@ -1,0 +1,346 @@
+$bgColor: #140E1E;
+$color1: #6a2555;
+$color2: #221023;
+$color3: #27c0d7;
+
+/* Contact Page Container */
+.contact-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, $bgColor 0%, $color2 50%, $color1 100%);
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contact-container-content {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* Contact Form Styling */
+.contact-container-content-form {
+    background: linear-gradient(135deg, rgba(34, 16, 35, 0.9) 0%, rgba(106, 37, 85, 0.3) 100%);
+    border: 2px solid $color3;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(39, 192, 215, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    flex: 1.2;
+    min-width: 0;
+}
+
+.contact-container-content-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(39, 192, 215, 0.1), transparent);
+    transition: left 0.8s ease;
+}
+
+.contact-container-content-form:hover::before {
+    left: 100%;
+}
+
+.contact-container-content-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(39, 192, 215, 0.4);
+}
+
+.contact-container-content-form h2 {
+    color: $color3;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.contact-container-content-form p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+/* Form Styling */
+.contact-container-content-form form {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-container-content-form label {
+    color: $color3;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: block;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.contact-container-content-form input,
+.contact-container-content-form textarea {
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background: rgba(20, 14, 30, 0.8);
+    border: 2px solid rgba(39, 192, 215, 0.3);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.contact-container-content-form input:focus,
+.contact-container-content-form textarea:focus {
+    outline: none;
+    border: 2px solid $color3;
+    box-shadow: 0 0 15px rgba(39, 192, 215, 0.4);
+    background: rgba(20, 14, 30, 0.9);
+}
+
+.contact-container-content-form input::placeholder,
+.contact-container-content-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-container-content-form textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Submit Button */
+.contact-container-content-form button {
+    width: 100%;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, $color1 0%, $color3 100%);
+    border: 2px solid $color3;
+    border-radius: 25px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-container-content-form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.contact-container-content-form button:hover::before {
+    left: 100%;
+}
+
+.contact-container-content-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(39, 192, 215, 0.4);
+    background: linear-gradient(135deg, $color3 0%, $color1 100%);
+}
+
+.contact-container-content-form button:active {
+    transform: translateY(0);
+}
+
+/* Map Container */
+.contact-container-content-map {
+    background: linear-gradient(135deg, rgba(34, 16, 35, 0.9) 0%, rgba(106, 37, 85, 0.3) 100%);
+    border: 2px solid $color3;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(39, 192, 215, 0.3);
+    position: relative;
+    overflow: visible;
+    transition: all 0.3s ease;
+    flex: 0.8;
+    min-width: 0;
+}
+
+.contact-container-content-map::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(39, 192, 215, 0.1), transparent);
+    transition: left 0.8s ease;
+}
+
+.contact-container-content-map:hover::before {
+    left: 100%;
+}
+
+.contact-container-content-map:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(39, 192, 215, 0.4);
+}
+
+.contact-container-content-map h2 {
+    color: $color3;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.contact-container-content-map iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    border: 2px solid rgba(39, 192, 215, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    display: block;
+    background: white;
+}
+
+.contact-container-content-map iframe:hover {
+    border: 2px solid $color3;
+    box-shadow: 0 0 15px rgba(39, 192, 215, 0.4);
+}
+
+/* Success/Error Messages */
+.form-message {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.form-message.success {
+    background: rgba(0, 255, 0, 0.2);
+    border: 2px solid #00ff00;
+    color: #00ff00;
+}
+
+.form-message.error {
+    background: rgba(255, 0, 0, 0.2);
+    border: 2px solid #ff0000;
+    color: #ff0000;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .contact-container-content {
+        flex-direction: column;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .contact-container {
+        padding: 20px 15px;
+    }
+    
+    .contact-container-content-form,
+    .contact-container-content-map {
+        padding: 20px;
+    }
+    
+    .contact-container-content-form h2,
+    .contact-container-content-map h2 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-container-content-form p {
+        font-size: 1rem;
+    }
+    
+    .contact-container-content-map iframe {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 15px 10px;
+    }
+    
+    .contact-container-content-form,
+    .contact-container-content-map {
+        padding: 20px;
+    }
+    
+    .contact-container-content-form h2,
+    .contact-container-content-map h2 {
+        font-size: 1.6rem;
+    }
+    
+    .contact-container-content-form p {
+        font-size: 0.95rem;
+    }
+    
+    .contact-container-content-map iframe {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-container-content-form,
+    .contact-container-content-map {
+        padding: 15px;
+    }
+    
+    .contact-container-content-form h2,
+    .contact-container-content-map h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contact-container-content-form input,
+    .contact-container-content-form textarea {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-container-content-form button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}

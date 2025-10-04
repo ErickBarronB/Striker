@@ -1,0 +1,297 @@
+$bgColor: #140E1E;
+$color1: #6a2555;
+$color2: #221023;
+$color3: #27c0d7;
+
+/* Product Card Container - Fixed Grid Layout with Scroll */
+.products-container-content-productShelf-itemCardHolder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fit, 280px); /* Fixed row height */
+    gap: 25px;
+    padding: 20px;
+    justify-items: center;
+    align-items: start;
+    height: 900px; /* Fixed height for 3 rows of cards */
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 2px solid rgba(39, 192, 215, 0.3);
+    border-radius: 15px;
+    background: linear-gradient(135deg, rgba(34, 16, 35, 0.8) 0%, rgba(106, 37, 85, 0.2) 100%);
+    box-shadow: inset 0 0 20px rgba(39, 192, 215, 0.2);
+}
+
+/* Custom scrollbar styling */
+.products-container-content-productShelf-itemCardHolder::-webkit-scrollbar {
+    width: 12px;
+}
+
+.products-container-content-productShelf-itemCardHolder::-webkit-scrollbar-track {
+    background: rgba(34, 16, 35, 0.8);
+    border-radius: 10px;
+}
+
+.products-container-content-productShelf-itemCardHolder::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, $color3 0%, $color1 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(34, 16, 35, 0.8);
+}
+
+.products-container-content-productShelf-itemCardHolder::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, lighten($color3, 10%) 0%, lighten($color1, 10%) 100%);
+}
+
+/* Product Item Card */
+.products-container-content-productShelf-itemCard {
+    background: linear-gradient(135deg, $bgColor 0%, $color2 50%, $color1 100%);
+    border: 2px solid $color3;
+    border-radius: 15px;
+    padding: 12px;
+    box-shadow: 0 8px 25px rgba(39, 192, 215, 0.4);
+    width: 100%;
+    max-width: 350px;
+    height: 280px; /* Fixed height to prevent overlapping */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.products-container-content-productShelf-itemCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(39, 192, 215, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.products-container-content-productShelf-itemCard:hover::before {
+    left: 100%;
+}
+
+.products-container-content-productShelf-itemCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(39, 192, 215, 0.6);
+}
+
+.products-container-content-productShelf-itemCard img {
+    width: 100%;
+    height: 155px; /* Slightly reduced to give more space for text */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    border: 2px solid rgba(39, 192, 215, 0.3);
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.products-container-content-productShelf-itemCard:hover img {
+    border: 2px solid $color3;
+    box-shadow: 0 0 15px rgba(39, 192, 215, 0.4);
+}
+
+.products-container-content-productShelf-itemCard h3 {
+    color: $color3;
+    font-size: 0.95rem; /* Slightly smaller title */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0; /* Prevent title from shrinking */
+    line-height: 1.2;
+    height: 2.4em; /* Slightly reduced height */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}
+
+.products-container-content-productShelf-itemCard p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem; /* Slightly smaller font to fit with taller image */
+    margin-bottom: 2px; /* Minimal margin */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    line-height: 1.1; /* Very tight line height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.products-container-content-productShelf-itemCard p:last-child {
+    margin-bottom: 0;
+}
+
+/* Container for product info to manage overflow */
+.products-container-content-productShelf-itemCard .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    min-height: 0; /* Allow content to shrink */
+}
+
+/* Product Info Labels */
+.products-container-content-productShelf-itemCard p strong {
+    color: $color3;
+    font-weight: bold;
+}
+
+/* Responsive Design for Product Cards */
+@media (max-width: 1200px) {
+    .products-container-content-productShelf-itemCardHolder {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto-fit, 260px); /* Slightly smaller row height */
+        gap: 20px;
+        padding: 15px;
+        height: 850px; /* Slightly smaller height for medium screens */
+    }
+    
+    .products-container-content-productShelf-itemCard {
+        max-width: 280px;
+        height: 260px; /* Match the row height */
+    }
+    
+    .products-container-content-productShelf-itemCard img {
+        height: 130px; /* Taller image for medium screens */
+    }
+    
+    .products-container-content-productShelf-itemCard h3 {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+        height: 2.4em; /* Adjust height for smaller font */
+    }
+    
+    .products-container-content-productShelf-itemCard p {
+        font-size: 0.7rem;
+        margin-bottom: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-container-content-productShelf-itemCardHolder {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-rows: repeat(auto-fit, auto); /* Auto height for flexible rows */
+        gap: 20px;
+        padding: 15px;
+        height: auto; /* Auto height to accommodate all items */
+        max-height: none; /* Remove height restriction */
+        overflow-y: visible; /* Allow natural scrolling */
+    }
+    
+    .products-container-content-productShelf-itemCard {
+        max-width: 100%;
+        height: auto; /* Auto height to fit content */
+        min-height: 200px; /* Minimum height for consistency */
+        padding: 20px;
+        display: flex;
+        flex-direction: row; /* Horizontal layout for mobile */
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .products-container-content-productShelf-itemCard img {
+        height: 120px;
+        width: 120px;
+        flex-shrink: 0; /* Prevent image from shrinking */
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    
+    .products-container-content-productShelf-itemCard .product-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-width: 0; /* Allow text to wrap */
+    }
+    
+    .products-container-content-productShelf-itemCard h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        height: auto; /* Auto height for full text display */
+        line-height: 1.3;
+        -webkit-line-clamp: 3; /* Allow 3 lines on mobile */
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+    }
+    
+    .products-container-content-productShelf-itemCard p {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+        line-height: 1.2;
+        white-space: normal; /* Allow text wrapping */
+        overflow: visible;
+        text-overflow: initial;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-container-content-productShelf-itemCardHolder {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-rows: repeat(auto-fit, auto); /* Auto height for flexible rows */
+        gap: 15px;
+        padding: 10px;
+        height: auto; /* Auto height to accommodate all items */
+        max-height: none; /* Remove height restriction */
+        overflow-y: visible; /* Allow natural scrolling */
+    }
+    
+    .products-container-content-productShelf-itemCard {
+        height: auto; /* Auto height to fit content */
+        min-height: 180px; /* Minimum height for consistency */
+        padding: 15px;
+        display: flex;
+        flex-direction: row; /* Horizontal layout for mobile */
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .products-container-content-productShelf-itemCard img {
+        height: 100px;
+        width: 100px;
+        flex-shrink: 0; /* Prevent image from shrinking */
+        object-fit: cover;
+        border-radius: 6px;
+    }
+    
+    .products-container-content-productShelf-itemCard .product-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-width: 0; /* Allow text to wrap */
+    }
+    
+    .products-container-content-productShelf-itemCard h3 {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        height: auto; /* Auto height for full text display */
+        line-height: 1.3;
+        -webkit-line-clamp: 2; /* Allow 2 lines on small mobile */
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+    }
+    
+    .products-container-content-productShelf-itemCard p {
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+        line-height: 1.2;
+        white-space: normal; /* Allow text wrapping */
+        overflow: visible;
+        text-overflow: initial;
+    }
+}

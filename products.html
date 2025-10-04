@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="Styles/sharedstyle.css">
+    <link rel="stylesheet" href="Styles/Products/productsstyle.css">
+    <link rel="stylesheet" href="Styles/Products/itemCard.css">
+
+
+</head>
+
+
+<body>
+    <nav>
+        <img src="src/Images/StrikerLogo.png" alt="logo" class="logo" onclick="window.location.href='index.html'">
+        <ul class="nav-links">
+            <li class="nav-link"><a href="index.html">Home</a></li>
+            <li class="nav-link"><a href="about.html">About</a></li>
+                <li class="nav-link"><a href="products.html">Products</a></li>
+            <li class="nav-link"><a href="contact.html">Contact</a></li>
+
+        </ul>
+    </nav>
+
+
+
+
+    <div class="products-container">
+        <div class="products-container-content">
+
+            <div class="products-container-content-searchHolder">
+
+                <div class="products-container-content-searchHolder-input">
+                    <h2>Search for a product</h2>
+                    <input type="text" placeholder="enter product keyword">
+                    <button>Search</button>
+                </div>
+                
+                <div class="products-container-content-searchHolder-filters">
+                    <h3>Filter by Category</h3>
+                    
+                    <div class="filter-group">
+                        <input type="checkbox" name="GPU" id="GPU">
+                        <label for="GPU">GPUs</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="CPU" id="CPU">
+                        <label for="CPU">CPUs</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Motherboard" id="Motherboard">
+                        <label for="Motherboard">Motherboards</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Memory" id="Memory">
+                        <label for="Memory">Memory</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Storage" id="Storage">
+                        <label for="Storage">Storage</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Power Supply" id="Power Supply">
+                        <label for="Power Supply">Power Supplies</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Cooling" id="Cooling">
+                        <label for="Cooling">Cooling</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Accessories" id="Accessories">
+                        <label for="Accessories">Accessories</label>
+                    </div>
+                    <div class="filter-group">
+                        <input type="checkbox" name="Case" id="Case">
+                        <label for="Case">Cases</label>
+                    </div>
+                    
+                    <div class="filter-buttons">
+                        <button>Select All</button>
+                        <button>Apply Filters</button>
+                        <button>Clear Filters</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="products-container-content-productShelf">
+                <!-- THIS IS THE PRICE SORTING AND FILTERING -->
+                <div class="products-container-content-productShelf-setBy">
+                    <h3>Sort By</h3>
+                    <div class="sort-options">
+                        <div class="sort-group">
+                            <label for="price-sort">Price:</label>
+                            <select id="price-sort" name="price-sort">
+                                <option value="low-high">Low to High</option>
+                                <option value="high-low">High to Low</option>
+                            </select>
+                        </div>
+                        
+                        <div class="sort-group">
+                            <label for="stock-sort">Stock:</label>
+                            <select id="stock-sort" name="stock-sort">
+                                <option value="high-stock">High Stock</option>
+                                <option value="low-stock">Low Stock</option>
+                            </select>
+                        </div>
+                        
+                        <div class="sort-group">
+                            <label for="condition-sort">Condition:</label>
+                            <select id="condition-sort" name="condition-sort">
+                                <option value="new">New</option>
+                                <option value="used">Used</option>
+                            </select>
+                        </div>
+                        
+                        <button class="apply-sort-btn">Apply Sort</button>
+                    </div>
+                </div>
+
+                <!-- Firebase Test Display -->
+                <div id="test-display" style="color: #27c0d7; font-size: 1.2rem; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                    Loading test data...
+                </div>
+
+                <div class="products-container-content-productShelf-itemCardHolder">
+                    
+                    <div class="products-container-content-productShelf-itemCard">
+    
+                        <img src="src/Images/Products/product1.jpg" alt="product1">
+                        <h3>Product 1</h3>
+                        <p>Price: $100</p>
+                        <p>Stock: 10</p>
+                        <p>Condition: New</p>
+                        <p>Category: GPU</p>
+    
+                    </div>
+                </div>
+                <!-- THIS IS THE PRODUCTS -->
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Striker</h3>
+                    <p>Powering the gaming community with high-performance PC components built for speed, reliability, and style.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 Buenos Aires, Argentina</p>
+                    <p>📧 info@striker.com</p>
+                    <p>📞 +54 11 1234-5678</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Striker. All rights reserved.</p>
+            </div>
+        </footer>
+    
+        <script src="JS/Home/home.js"></script>
+        <script src="JS/Navbar.js"></script>
+
+
+
+
+
+
+
+         <script type="module">
+             import { database } from "./JS/Products/database.js";
+
+             console.log('Database connected:', database);
+           </script>
+
+
+</body>
+</html>
