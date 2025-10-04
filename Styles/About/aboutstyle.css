@@ -177,14 +177,60 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .about-container {
+    height: auto;
+    min-height: 100vh;
+    justify-content: flex-start;
+    padding-top: 80px; /* Account for navbar height */
+    padding-bottom: 40px;
+  }
+  .about-container-content {
+    width: 90%;
+    max-width: 600px;
+    gap: 30px;
+  }
+  .about-container-content-mission,
+  .about-container-content-vision,
+  .about-container-content-values {
+    padding: 25px;
+  }
   .about-container-content-mission h2,
   .about-container-content-vision h2,
   .about-container-content-values h2 {
     font-size: 1.8rem;
+    margin-bottom: 15px;
   }
   .about-container-content-mission p,
   .about-container-content-vision p,
   .values-list li {
     font-size: 1rem;
+    margin-bottom: 12px;
+  }
+}
+@media (max-width: 480px) {
+  .about-container {
+    padding-top: 70px;
+    padding-bottom: 30px;
+  }
+  .about-container-content {
+    width: 95%;
+    gap: 25px;
+  }
+  .about-container-content-mission,
+  .about-container-content-vision,
+  .about-container-content-values {
+    padding: 20px;
+  }
+  .about-container-content-mission h2,
+  .about-container-content-vision h2,
+  .about-container-content-values h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  .about-container-content-mission p,
+  .about-container-content-vision p,
+  .values-list li {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
   }
 }/*# sourceMappingURL=aboutstyle.css.map */

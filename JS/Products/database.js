@@ -105,6 +105,13 @@ function displayAllItemCards(items) {
             </div>
         `;
         
+        // Add mobile click functionality
+        productCard.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                showMobileDetailCard(item);
+            }
+        });
+        
         productShelf.appendChild(productCard);
     });
     
@@ -410,6 +417,105 @@ function applySorting(items) {
     console.log(`Sorted ${sortedItems.length} items`);
     return sortedItems;
 }
+
+// Mobile Detail Card Functions
+function showMobileDetailCard(item) {
+    // Create mobile detail card modal if it doesn't exist
+    let mobileDetailCard = document.querySelector('.mobile-detail-card');
+    
+    if (!mobileDetailCard) {
+        mobileDetailCard = document.createElement('div');
+        mobileDetailCard.className = 'mobile-detail-card';
+        mobileDetailCard.innerHTML = `
+            <div class="mobile-detail-card-content">
+                <button class="mobile-detail-card-close" onclick="closeMobileDetailCard()">&times;</button>
+                <img src="${item.image || 'src/Images/Products/product1.jpg'}" alt="${item.name}">
+                <h3>${item.name || 'Product Name'}</h3>
+                <div class="product-details">
+                    <p><strong>Price:</strong> $${item.price || 'N/A'}</p>
+                    <p><strong>Stock:</strong> ${item.stock || 'N/A'}</p>
+                    <p><strong>Condition:</strong> ${item.condition || 'N/A'}</p>
+                    <p><strong>Category:</strong> ${item.category || 'N/A'}</p>
+                    ${item.description ? `<p><strong>Description:</strong> ${item.description}</p>` : ''}
+                </div>
+            </div>
+        `;
+        // Append to body and ensure it's at the end of DOM
+        document.body.appendChild(mobileDetailCard);
+        
+        // Force the modal to be on top
+        mobileDetailCard.style.position = 'fixed';
+        mobileDetailCard.style.zIndex = '99999';
+        mobileDetailCard.style.top = '0';
+        mobileDetailCard.style.left = '0';
+        mobileDetailCard.style.width = '100%';
+        mobileDetailCard.style.height = '100%';
+    } else {
+        // Update existing modal with new item data
+        const content = mobileDetailCard.querySelector('.mobile-detail-card-content');
+        content.innerHTML = `
+            <button class="mobile-detail-card-close" onclick="closeMobileDetailCard()">&times;</button>
+            <img src="${item.image || 'src/Images/Products/product1.jpg'}" alt="${item.name}">
+            <h3>${item.name || 'Product Name'}</h3>
+            <div class="product-details">
+                <p><strong>Price:</strong> $${item.price || 'N/A'}</p>
+                <p><strong>Stock:</strong> ${item.stock || 'N/A'}</p>
+                <p><strong>Condition:</strong> ${item.condition || 'N/A'}</p>
+                <p><strong>Category:</strong> ${item.category || 'N/A'}</p>
+                ${item.description ? `<p><strong>Description:</strong> ${item.description}</p>` : ''}
+            </div>
+        `;
+    }
+    
+    // Show the modal
+    mobileDetailCard.classList.add('active');
+    
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+    
+    // Add click outside to close functionality
+    mobileDetailCard.addEventListener('click', function(e) {
+        if (e.target === mobileDetailCard) {
+            closeMobileDetailCard();
+        }
+    });
+    
+    // Add ESC key to close functionality
+    const handleEscapeKey = function(e) {
+        if (e.key === 'Escape') {
+            closeMobileDetailCard();
+            document.removeEventListener('keydown', handleEscapeKey);
+        }
+    };
+    document.addEventListener('keydown', handleEscapeKey);
+    
+    console.log('Mobile detail card opened for:', item.name);
+}
+
+function closeMobileDetailCard() {
+    const mobileDetailCard = document.querySelector('.mobile-detail-card');
+    if (mobileDetailCard) {
+        mobileDetailCard.classList.remove('active');
+        
+        // Restore body scrolling
+        document.body.style.overflow = 'auto';
+        
+        console.log('Mobile detail card closed');
+    }
+}
+
+// Make closeMobileDetailCard globally accessible
+window.closeMobileDetailCard = closeMobileDetailCard;
+
+// Hide mobile detail card when switching back to desktop
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        const mobileDetailCard = document.querySelector('.mobile-detail-card');
+        if (mobileDetailCard && mobileDetailCard.classList.contains('active')) {
+            closeMobileDetailCard();
+        }
+    }
+});
 
 // Call the function when the module loads
 fetchAllItems();
