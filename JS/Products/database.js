@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+import { addToCart, updateCartBadge } from '../cart.js';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -93,21 +94,36 @@ function displayAllItemCards(items) {
     items.forEach(item => {
         const productCard = document.createElement('div');
         productCard.className = 'products-container-content-productShelf-itemCard';
+        
+        // Determine if stock is available
+        const hasStock = item.stock && item.stock > 0;
+        const stockDisplay = hasStock ? item.stock : 'Out of Stock';
+        const stockClass = hasStock ? 'in-stock' : 'out-of-stock';
+        
         productCard.innerHTML = `
             <img src="${item.image || 'src/Images/Products/product1.jpg'}" alt="${item.name}">
             <h3>${item.name || 'Product Name'}</h3>
             <div class="product-info">
                 <p><strong>Price:</strong> $${item.price || 'N/A'}</p>
-                <p><strong>Stock:</strong> ${item.stock || 'N/A'}</p>
+                <p class="${stockClass}"><strong>Stock:</strong> ${stockDisplay}</p>
                 <p><strong>Condition:</strong> ${item.condition || 'N/A'}</p>
                 <p><strong>Category:</strong> ${item.category || 'N/A'}</p>
                 ${item.description ? `<p><strong>Description:</strong> ${item.description}</p>` : ''}
             </div>
+            ${hasStock ? `<button class="add-to-cart-btn" data-item-id="${item.id}">Add to Cart</button>` : '<button class="add-to-cart-btn disabled" disabled>Out of Stock</button>'}
         `;
         
-        // Add mobile click functionality
-        productCard.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
+        // Add event listener to the button if it exists
+        const addToCartBtn = productCard.querySelector('.add-to-cart-btn');
+        if (addToCartBtn && hasStock) {
+            addToCartBtn.addEventListener('click', function(event) {
+                addToCartHandler(event, item);
+            });
+        }
+        
+        // Add mobile click functionality (but not on the button)
+        productCard.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('add-to-cart-btn') && window.innerWidth <= 768) {
                 showMobileDetailCard(item);
             }
         });
@@ -423,6 +439,11 @@ function showMobileDetailCard(item) {
     // Create mobile detail card modal if it doesn't exist
     let mobileDetailCard = document.querySelector('.mobile-detail-card');
     
+    // Determine if stock is available
+    const hasStock = item.stock && item.stock > 0;
+    const stockDisplay = hasStock ? item.stock : 'Out of Stock';
+    const stockClass = hasStock ? 'in-stock' : 'out-of-stock';
+    
     if (!mobileDetailCard) {
         mobileDetailCard = document.createElement('div');
         mobileDetailCard.className = 'mobile-detail-card';
@@ -433,15 +454,24 @@ function showMobileDetailCard(item) {
                 <h3>${item.name || 'Product Name'}</h3>
                 <div class="product-details">
                     <p><strong>Price:</strong> $${item.price || 'N/A'}</p>
-                    <p><strong>Stock:</strong> ${item.stock || 'N/A'}</p>
+                    <p class="${stockClass}"><strong>Stock:</strong> ${stockDisplay}</p>
                     <p><strong>Condition:</strong> ${item.condition || 'N/A'}</p>
                     <p><strong>Category:</strong> ${item.category || 'N/A'}</p>
                     ${item.description ? `<p><strong>Description:</strong> ${item.description}</p>` : ''}
                 </div>
+                ${hasStock ? `<button class="add-to-cart-btn" data-item-id="${item.id}">Add to Cart</button>` : '<button class="add-to-cart-btn disabled" disabled>Out of Stock</button>'}
             </div>
         `;
         // Append to body and ensure it's at the end of DOM
         document.body.appendChild(mobileDetailCard);
+        
+        // Add event listener to mobile detail card button
+        const mobileAddBtn = mobileDetailCard.querySelector('.add-to-cart-btn');
+        if (mobileAddBtn && hasStock) {
+            mobileAddBtn.addEventListener('click', function(event) {
+                addToCartHandler(event, item);
+            });
+        }
         
         // Force the modal to be on top
         mobileDetailCard.style.position = 'fixed';
@@ -459,12 +489,21 @@ function showMobileDetailCard(item) {
             <h3>${item.name || 'Product Name'}</h3>
             <div class="product-details">
                 <p><strong>Price:</strong> $${item.price || 'N/A'}</p>
-                <p><strong>Stock:</strong> ${item.stock || 'N/A'}</p>
+                <p class="${stockClass}"><strong>Stock:</strong> ${stockDisplay}</p>
                 <p><strong>Condition:</strong> ${item.condition || 'N/A'}</p>
                 <p><strong>Category:</strong> ${item.category || 'N/A'}</p>
                 ${item.description ? `<p><strong>Description:</strong> ${item.description}</p>` : ''}
             </div>
+            ${hasStock ? `<button class="add-to-cart-btn" data-item-id="${item.id}">Add to Cart</button>` : '<button class="add-to-cart-btn disabled" disabled>Out of Stock</button>'}
         `;
+        
+        // Add event listener to updated mobile detail card button
+        const mobileAddBtn = content.querySelector('.add-to-cart-btn');
+        if (mobileAddBtn && hasStock) {
+            mobileAddBtn.addEventListener('click', function(event) {
+                addToCartHandler(event, item);
+            });
+        }
     }
     
     // Show the modal
@@ -516,6 +555,31 @@ window.addEventListener('resize', function() {
         }
     }
 });
+
+// Handler function for add to cart button clicks
+function addToCartHandler(event, item) {
+    event.stopPropagation(); // Prevent the card click event from firing
+    
+    // Call addToCart directly using the imported function
+    const success = addToCart(item);
+    if (success) {
+        // Visual feedback
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = 'Added!';
+        button.disabled = true;
+        button.style.opacity = '0.7';
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+            button.style.opacity = '1';
+        }, 1500);
+    }
+}
+
+// Make addToCartHandler globally available
+window.addToCartHandler = addToCartHandler;
 
 // Call the function when the module loads
 fetchAllItems();

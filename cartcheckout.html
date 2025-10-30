@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Checkout - Striker</title>
+    <link rel="stylesheet" href="Styles/sharedstyle.css">
+    <link rel="stylesheet" href="Styles/Cart/cartstyle.css">
+</head>
+<body>
+    <nav>
+        <img src="src/Images/StrikerLogo.png" alt="logo" class="logo" onclick="window.location.href='index.html'">
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li class="nav-link"><a href="index.html">Home</a></li>
+            <li class="nav-link"><a href="about.html">About</a></li>
+            <li class="nav-link"><a href="products.html">Products</a></li>
+            <li class="nav-link"><a href="contact.html">Contact</a></li>
+            <li class="nav-link cart-link">
+                <a href="cartcheckout.html" id="cart-icon">
+                    🛒
+                    <span class="cart-badge" id="cart-badge"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="cart-container">
+        <div class="cart-container-content">
+            <h1>Your Cart</h1>
+            
+            <!-- Cart Items Display -->
+            <div class="cart-items-section">
+                <div id="cart-items-container">
+                    <!-- Cart items will be dynamically inserted here -->
+                    <div class="empty-cart-message">
+                        <h2>Your cart is empty</h2>
+                        <p>Add some products to your cart to get started!</p>
+                        <a href="products.html" class="shop-button">Browse Products</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary-section">
+                <div class="cart-summary-card">
+                    <h2>Order Summary</h2>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span id="cart-shipping">Free</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Tax (10%):</span>
+                        <span id="cart-tax">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-divider"></div>
+                    
+                    <!-- Promo Section -->
+                    <div class="promo-section">
+                        <label for="promo-select" class="promo-label">Select Promotion:</label>
+                        <select id="promo-select" class="promo-select">
+                            <option value="none">No Promotion</option>
+                            <option value="50off">50% off Second Item (Buy 2)</option>
+                            <option value="3x2">3x2 (Buy 3 Pay for 2)</option>
+                            <option value="10percent">15% off over $1,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="summary-row" id="discount-row" style="display: none;">
+                        <span>Discount Applied:</span>
+                        <span id="cart-discount">-$0.00</span>
+                    </div>
+                    
+                    <div class="summary-row" id="savings-row" style="display: none;">
+                        <span>You Save:</span>
+                        <span id="cart-savings">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-divider"></div>
+                    
+                    <div class="summary-row total-row">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal-final">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-row" id="final-total-row" style="display: none;">
+                        <span>Final Total (with promo):</span>
+                        <span id="cart-total-final" class="final-total-amount">$0.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Total:</span>
+                        <span id="cart-total">$0.00</span>
+                    </div>
+
+                    <button class="checkout-button" id="checkout-button" disabled>
+                        Proceed to Checkout
+                    </button>
+
+                    <a href="products.html" class="continue-shopping-button">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Striker</h3>
+                <p>Powering the gaming community with high-performance PC components built for speed, reliability, and style.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p>📍 Buenos Aires, Argentina</p>
+                <p>📧 info@striker.com</p>
+                <p>📞 +54 11 1234-5678</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Striker. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="JS/Navbar.js"></script>
+    <script type="module">
+        import { initCart } from './JS/cart.js';
+        initCart(); // Initialize cart to load from localStorage
+        
+        // Import and run display cart after initialization
+        import('./JS/Cart/displayCart.js').then(module => {
+            module.displayCartItems();
+        });
+    </script>
+</body>
+</html>

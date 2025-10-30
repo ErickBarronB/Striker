@@ -27,6 +27,12 @@
                 <li class="nav-link"><a href="about.html">About</a></li>
                 <li class="nav-link"><a href="products.html">Products</a></li>
                 <li class="nav-link"><a href="contact.html">Contact</a></li>
+                <li class="nav-link cart-link">
+                    <a href="cartcheckout.html" id="cart-icon">
+                        🛒
+                        <span class="cart-badge" id="cart-badge"></span>
+                    </a>
+                </li>
             </ul>
         </nav>
     
@@ -109,5 +115,9 @@
 
         <script src="JS/Home/home.js"></script>
         <script src="JS/Navbar.js"></script>
+        <script type="module">
+            import { initCart } from './JS/cart.js';
+            initCart();
+        </script>
 </body>
 </html>

@@ -27,6 +27,12 @@
                 <li class="nav-link"><a href="about.html">About</a></li>
                 <li class="nav-link"><a href="products.html">Products</a></li>
                 <li class="nav-link"><a href="contact.html">Contact</a></li>
+                <li class="nav-link cart-link">
+                    <a href="cartcheckout.html" id="cart-icon">
+                        🛒
+                        <span class="cart-badge" id="cart-badge"></span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -214,9 +220,15 @@
 
          <script type="module">
              import { database } from "./JS/Products/database.js";
+             import { initCart } from "./JS/cart.js";
 
              console.log('Database connected:', database);
+             
+             // Initialize cart on page load
+             initCart();
            </script>
+           
+           <script src="JS/cart.js" type="module"></script>
 
 
 </body>

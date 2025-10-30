@@ -2,12 +2,12 @@
 .products-container-content-productShelf-itemCardHolder {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, 280px); /* Fixed row height */
+  grid-template-rows: repeat(auto-fit, 340px); /* Fixed row height - increased to fit button */
   gap: 25px;
   padding: 20px;
   justify-items: center;
   align-items: start;
-  height: 900px; /* Fixed height for 3 rows of cards */
+  height: 1100px; /* Fixed height for 3 rows of cards - increased */
   overflow-y: auto;
   overflow-x: hidden;
   border: 2px solid rgba(39, 192, 215, 0.3);
@@ -45,13 +45,15 @@
   box-shadow: 0 8px 25px rgba(39, 192, 215, 0.4);
   width: 100%;
   max-width: 350px;
-  height: 280px; /* Fixed height to prevent overlapping */
+  height: 340px; /* Increased height to fit the add-to-cart button */
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Changed back to hidden to prevent hover flicker */
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* Distribute content evenly */
+  z-index: 1; /* Ensure card is above pseudo-element */
 }
 
 .products-container-content-productShelf-itemCard::before {
@@ -63,6 +65,8 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(39, 192, 215, 0.1), transparent);
   transition: left 0.5s ease;
+  pointer-events: none; /* Prevent the pseudo-element from interfering with mouse events */
+  z-index: -1; /* Keep it behind the content */
 }
 
 .products-container-content-productShelf-itemCard:hover::before {
@@ -72,6 +76,7 @@
 .products-container-content-productShelf-itemCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 35px rgba(39, 192, 215, 0.6);
+  z-index: 10; /* Higher z-index on hover to prevent overlap issues */
 }
 
 .products-container-content-productShelf-itemCard img {
@@ -134,6 +139,7 @@
   justify-content: flex-start;
   overflow: hidden;
   min-height: 0; /* Allow content to shrink */
+  max-height: 150px; /* Limit max height to prevent overflow */
 }
 
 /* Product Info Labels */
@@ -142,18 +148,73 @@
   font-weight: bold;
 }
 
+/* Stock Status Colors */
+.products-container-content-productShelf-itemCard .in-stock {
+  color: #4ade80 !important;
+}
+
+.products-container-content-productShelf-itemCard .out-of-stock {
+  color: #ef4444 !important;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #27c0d7 0%, #6a2555 100%);
+  border: 2px solid #27c0d7;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(39, 192, 215, 0.3);
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #51cde0 0%, #903273 100%);
+  border-color: #51cde0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 192, 215, 0.5);
+}
+
+.add-to-cart-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(39, 192, 215, 0.3);
+}
+
+.add-to-cart-btn.disabled {
+  background: linear-gradient(135deg, #666 0%, #444 100%);
+  border-color: #666;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.add-to-cart-btn.disabled:hover {
+  transform: none;
+  background: linear-gradient(135deg, #666 0%, #444 100%);
+  border-color: #666;
+  box-shadow: none;
+}
+
 /* Responsive Design for Product Cards */
 @media (max-width: 1200px) {
   .products-container-content-productShelf-itemCardHolder {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(auto-fit, 260px); /* Slightly smaller row height */
+    grid-template-rows: repeat(auto-fit, 320px); /* Increased for button */
     gap: 20px;
     padding: 15px;
-    height: 850px; /* Slightly smaller height for medium screens */
+    height: 1000px; /* Increased for medium screens */
   }
   .products-container-content-productShelf-itemCard {
     max-width: 280px;
-    height: 260px; /* Match the row height */
+    height: 320px; /* Match the row height - increased for button */
   }
   .products-container-content-productShelf-itemCard img {
     height: 130px; /* Taller image for medium screens */
